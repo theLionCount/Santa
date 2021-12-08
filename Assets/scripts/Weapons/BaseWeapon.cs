@@ -17,11 +17,20 @@ public class BaseWeapon : MonoBehaviour
 
     public float spreadAngle;
 
+    public bool playerWeapon;
+    public float screenShakeMagnitude;
+
+    ScreenShakeController screenShake;
+
+    Animator anim;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
         aim = GetComponent<Aiming>();
         weaponController = GetComponent<WeaponController>();
+        screenShake = GameObject.Find("GamePlay").GetComponent<ScreenShakeController>();
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -47,6 +56,9 @@ public class BaseWeapon : MonoBehaviour
 
         var blt = Instantiate(bullet, barrel.transform.position, Quaternion.Euler(0, 0, aim.angle + spread)).GetComponent<Bullet>();
         blt.dir = Quaternion.Euler(0, 0, spread) * aim.dir.normalized;
+
+        if (playerWeapon) screenShake.shake(screenShakeMagnitude);
+
     }
 
     protected virtual void doMuzzleFlash()
@@ -58,5 +70,10 @@ public class BaseWeapon : MonoBehaviour
 
     public virtual void reload()
     { 
+    }
+
+    public virtual void onHit()
+    {
+        anim.SetTrigger("Hit");
     }
 }

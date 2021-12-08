@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IDmgSource
 {
     public Vector3 dir;
     public float v;
     public GameObject onHit;
+    public float dmg;
 
     // Start is called before the first frame update
     void Start()
@@ -29,5 +30,10 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public float hitTarget(IDmgTarget target)
+    {       
+        return dmg;
     }
 }

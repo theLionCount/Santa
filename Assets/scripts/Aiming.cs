@@ -20,7 +20,7 @@ public class Aiming : MonoBehaviour
         dir = Vector3.zero;
     }
 
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         var rotation = Vector3.SignedAngle(new Vector3(-1, 0, 0), dir, new Vector3(0, 0, 1));
         angle = rotation;

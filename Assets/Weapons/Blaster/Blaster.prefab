@@ -40,11 +40,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5163642129776912223}
   - component: {fileID: 5163642129776912216}
-  - component: {fileID: 5163642129776912217}
-  - component: {fileID: 1377603334}
+  - component: {fileID: 1924400966}
+  - component: {fileID: 1924400967}
+  - component: {fileID: 1924400969}
+  - component: {fileID: 1924400970}
+  - component: {fileID: 1443262762785793398}
   m_Layer: 0
   m_Name: Blaster
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +86,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,7 +118,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5163642129776912217
+--- !u!114 &1924400966
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,11 +127,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 5163642129776912222}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e8467497985dcd439866c3ff08776d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 449bf4254ccfb7a42a82ff8acc774e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reloadInProgress: 0
+  reloadObject: {fileID: 6117896856634354433, guid: 860a2895ab0aa8c43b7f39509d9ada11, type: 3}
+  rldSpeed: 0.6
+--- !u!114 &1924400967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163642129776912222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95c2c482a5bc134fbbad12ae2e6331a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dir: {x: 0, y: 0, z: 0}
---- !u!114 &1377603334
+  angle: 0
+--- !u!114 &1924400969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,10 +156,51 @@ MonoBehaviour:
   m_GameObject: {fileID: 5163642129776912222}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb05a43f7d92e940808ce24baa74e48, type: 3}
+  m_Script: {fileID: 11500000, guid: 1da4c241ffd6cbc4489b4e2eb2509463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
+  blaster: {fileID: 1924400970}
+  semiAuto: 0
+  burstFire: 0
+  burstSize: 5
+--- !u!114 &1924400970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163642129776912222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b250a857b5a510d4696a075b247c7a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 4495059461021274149, guid: 418406a0d8456ec419e2fc58df15c9e3, type: 3}
   muzzleFlash: {fileID: 80538408460125870, guid: 16e723bb5676258488e67a8e07433720, type: 3}
   barrel: {fileID: 5163642129645079629}
-  coolDown: 10
+  coolDown: 5
+  currntBustSize: 0
+  spreadAngle: 7
+  playerWeapon: 1
+  screenShakeMagnitude: 0.08
+  magSize: 30
+  bulletsInMag: 0
+--- !u!95 &1443262762785793398
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163642129776912222}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 092d36b4a7568f642b393df9aee0b4c4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
