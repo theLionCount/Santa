@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5163642129645079630}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 1924400969}
   - component: {fileID: 1924400970}
   - component: {fileID: -2874707359027013905}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pistol
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ MonoBehaviour:
   blaster: {fileID: 1924400970}
   semiAuto: 1
   burstFire: 0
-  burstSize: 5
+  burstSize: 6
 --- !u!114 &1924400970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,11 +178,14 @@ MonoBehaviour:
   bullet: {fileID: 4495059461021274149, guid: 4983fa2b102cef946a8ae4bab271a920, type: 3}
   muzzleFlash: {fileID: 80538408460125870, guid: bc84cb103cf23a547bc2cbf23f65a49d, type: 3}
   barrel: {fileID: 5163642129645079629}
-  coolDown: 10
+  coolDown: 12
   currntBustSize: 0
   spreadAngle: 2
   playerWeapon: 1
   screenShakeMagnitude: 0.3
+  pop: 0
+  dmg: 60
+  secondaryTarget: 0
   magSize: 6
   bulletsInMag: 0
 --- !u!95 &-2874707359027013905

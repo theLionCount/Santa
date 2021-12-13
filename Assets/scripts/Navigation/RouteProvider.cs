@@ -12,7 +12,7 @@ public class RouteProvider
 
 	public RouteProvider()
 	{
-		map = GameObject.Find("GamePlay").GetComponent<MapModule>();
+		map = GameObject.FindGameObjectWithTag("Room").GetComponent<MapModule>();
 		route = new List<Vector2Int>();
 		response = new RouteResponse();
 	}

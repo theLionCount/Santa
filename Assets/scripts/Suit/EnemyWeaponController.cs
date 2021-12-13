@@ -6,7 +6,7 @@ public class EnemyWeaponController : WeaponController
 {
     public float cooldown;
     float cd;
-    MagazinedWeapon mw;
+    public MagazinedWeapon mw;
 
     private void Start()
     {
@@ -18,14 +18,6 @@ public class EnemyWeaponController : WeaponController
     {
         if (mw != null && mw.bulletsInMag <= 0) cd--;
         else cd = cooldown;
-
-        //cd--;
-        //if (cd <= 0)
-        //{
-        //    if (mw != null && mw.bulletsInMag <= 0) mw.reload();
-        //    else blaster.fire();
-        //    cd = cooldown;  
-        //}
     }
 
     public void fire()

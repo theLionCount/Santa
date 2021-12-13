@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IDmgSource
 {
     public float hitTarget(IDmgTarget target);
+
+    public float getDamage();
 }

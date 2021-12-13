@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour, IDmgTarget
+public class Character : MonoBehaviour, IDmgTarget, IMovable
 {
     public float speed;
 
@@ -13,10 +13,21 @@ public class Character : MonoBehaviour, IDmgTarget
     Aiming gunAim;
 
     public float health;
+    public float maxHealth;
 
     public WeaponController weaponController;
 
     public float rollSpeedModifier = 1.4f;
+    public float rollDamageReduction;
+    public int rollNum = 1;
+    public float rollCDTime;
+
+    float rollCD;
+    int currentRolls;
+
+    public float dmgRed = 1;
+
+    DamageNumberCreator damageNumbers;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +35,10 @@ public class Character : MonoBehaviour, IDmgTarget
 
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        damageNumbers = GetComponentInChildren<DamageNumberCreator>();
         contactFilter.useTriggers = false;
-        contactFilter.SetLayerMask((Physics2D.GetLayerCollisionMask(LayerMask.NameToLayer("Walls"))));
+        //contactFilter.SetLayerMask((Physics2D.GetLayerCollisionMask(LayerMask.NameToLayer("Walls"))));
+        contactFilter.SetLayerMask(LayerMask.GetMask("Walls"));
         contactFilter.useLayerMask = true;
         gunAim = gameObject.GetComponentInChildren<Aiming>();
         weaponController = gameObject.GetComponentInChildren<WeaponController>();
@@ -40,12 +53,27 @@ public class Character : MonoBehaviour, IDmgTarget
     }
 
     bool midRoll;
+
+    int startedRolls;
+    Vector2 rDir;
+    public void startRoll(Vector2 dir)
+    {
+        rDir = dir;
+        startedRolls++;
+        if (startedRolls > currentRolls) startedRolls = currentRolls;
+    }
+
     public void roll(Vector2 dir)
     {
-        movementDir = dir;
-        midRoll = true;
-        anim.SetTrigger("Roll");
-        weaponController.blaster.gameObject.SetActive(false);
+        if (!midRoll && currentRolls > 0)
+        {
+            movementDir = dir;
+            midRoll = true;
+            anim.SetTrigger("Roll");
+            weaponController.blaster.gameObject.SetActive(false);
+            rollCD = rollCDTime;
+            currentRolls--;
+        }
     }
 
     public void endRoll()
@@ -58,7 +86,14 @@ public class Character : MonoBehaviour, IDmgTarget
 
     public virtual void FixedUpdate()
     {
+        if (!midRoll && startedRolls > 0)
+        {
+            roll(rDir);
+            startedRolls--;
 
+        }
+        rollCD--;
+        if (rollCD <= 0) currentRolls = rollNum;
         if (health <= 0)
         {
             anim.SetTrigger("Die");
@@ -86,6 +121,7 @@ public class Character : MonoBehaviour, IDmgTarget
 
         float magnitudeAdjustment = rb2d.Cast(horizontal, contactFilter, hitBuffer, 0) > 0 ? 3f : 2f;
 
+        
 
         if (rb2d.Cast(horizontal, contactFilter, hitBuffer, horizontal.magnitude * magnitudeAdjustment) <= 0) rb2d.position += horizontal;
         if (rb2d.Cast(vertical, contactFilter, hitBuffer, vertical.magnitude * magnitudeAdjustment) <= 0) rb2d.position += vertical;
@@ -99,7 +135,11 @@ public class Character : MonoBehaviour, IDmgTarget
 
     public void damageHit(IDmgSource source)
     {
-        health -= source.hitTarget(this);
+        var dmg = source.hitTarget(this);
+        var realDmg = dmg * (!midRoll ? 1 : rollDamageReduction) * dmgRed;
+        health -= realDmg;
+        if (health + realDmg > 0) damageNumbers.damage(realDmg);
+
         anim.SetTrigger("Hit");
         if (weaponController != null)
         {

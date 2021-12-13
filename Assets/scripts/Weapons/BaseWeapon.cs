@@ -24,6 +24,12 @@ public class BaseWeapon : MonoBehaviour
 
     Animator anim;
 
+    public int pop;
+    public float dmg;
+    public bool secondaryTarget;
+
+    public float bulletSizeMod = 1f;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -56,6 +62,11 @@ public class BaseWeapon : MonoBehaviour
 
         var blt = Instantiate(bullet, barrel.transform.position, Quaternion.Euler(0, 0, aim.angle + spread)).GetComponent<Bullet>();
         blt.dir = Quaternion.Euler(0, 0, spread) * aim.dir.normalized;
+        blt.dmg = dmg;
+        blt.pop = pop;
+        blt.secondaryTarget = secondaryTarget;
+        blt.transform.localScale = blt.transform.localScale * bulletSizeMod;
+     
 
         if (playerWeapon) screenShake.shake(screenShakeMagnitude);
 

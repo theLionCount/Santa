@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovementController : MonoBehaviour
 {
@@ -30,10 +31,6 @@ public class MovementController : MonoBehaviour
         character.move(getDir(Vector2.zero));
     }
 
-    
-
-
-
     // Update is called once per frame
     void Update()
     {
@@ -43,7 +40,12 @@ public class MovementController : MonoBehaviour
         d = Input.GetKey(KeyCode.D);
         if (Input.GetMouseButtonDown(1))
         {
-            character.roll(getDir(Vector2.one));
+            character.startRoll(getDir(Vector2.one));
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("S1");
         }
     }
 }

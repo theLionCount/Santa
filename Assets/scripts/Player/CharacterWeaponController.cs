@@ -41,7 +41,7 @@ public class CharacterWeaponController : WeaponController
         {
             if (reloader.reloadInProgress)
             {
-                if (!startedReload) fireOn = false;
+               // if (!startedReload) fireOn = false;
                 startedReload = true;
             }
             else
@@ -72,7 +72,10 @@ public class CharacterWeaponController : WeaponController
                 blaster.fire();
                 if (semiAuto) fireOn = false;
             }
-            else mw.reload();
+            else
+            {
+                mw.reload();
+            }
         }
 
 

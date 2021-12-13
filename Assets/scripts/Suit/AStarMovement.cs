@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AStarMovement : MonoBehaviour
 {
-    Character character;
+    IMovable character;
     RouteProvider rp;
     public float targetPrecission;
 
@@ -14,7 +14,7 @@ public class AStarMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        character = GetComponent<Character>();
+        character = GetComponent<IMovable>();
         rp = new RouteProvider();
     }
 

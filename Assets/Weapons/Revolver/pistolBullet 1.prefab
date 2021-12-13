@@ -101,7 +101,7 @@ MonoBehaviour:
   dir: {x: 0, y: 0, z: 0}
   v: 0.9
   onHit: {fileID: 5206270012160372673, guid: f5ff093dd9cb2c54c95006fc28efb45d, type: 3}
-  dmg: 40
+  dmg: 60
 --- !u!58 &9145293872817683479
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -115,9 +115,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.22460577, y: 0}
+  m_Offset: {x: 0.119882256, y: 0}
   serializedVersion: 2
-  m_Radius: 0.19114444
+  m_Radius: 0.29586795
 --- !u!50 &1088017944654252637
 Rigidbody2D:
   serializedVersion: 4

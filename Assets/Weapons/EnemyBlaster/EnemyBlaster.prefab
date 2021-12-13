@@ -153,6 +153,9 @@ MonoBehaviour:
   spreadAngle: 3
   playerWeapon: 0
   screenShakeMagnitude: 0.08
+  pop: 0
+  dmg: 10
+  secondaryTarget: 0
   magSize: 6
   bulletsInMag: 0
 --- !u!114 &975544745
@@ -203,3 +206,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blaster: {fileID: 1924400970}
   cooldown: 30
+  mw: {fileID: 0}

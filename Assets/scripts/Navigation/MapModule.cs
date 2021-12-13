@@ -7,7 +7,6 @@ using UnityEngine.Tilemaps;
 
 public class MapModule : MonoBehaviour
 {
-    public List<GameObject> rooms;
     bool[,] map;
     int w, h, xOffset, yOffset;
 
@@ -16,17 +15,19 @@ public class MapModule : MonoBehaviour
     object lck;
     Thread processThread;
 
+    public Tilemap walls;
+
     // Start is called before the first frame update
     void Start()
     {
-        Tilemap tm = rooms[0].transform.Find("Walls").GetComponent<Tilemap>();
-        BoundsInt bounds = tm.cellBounds;
+        //Tilemap tm = GameObject.FindGameObjectWithTag("Room").transform.Find("Grid").transform.Find("Walls").GetComponent<Tilemap>();
+        BoundsInt bounds = walls.cellBounds;
         w = (int)bounds.size.x;
         h = (int)bounds.size.y;
-        xOffset = (int)(bounds.x + rooms[0].transform.position.x);
-        yOffset = (int)(bounds.y + rooms[0].transform.position.y);
+        xOffset = (int)(bounds.x + walls.transform.parent.position.x);
+        yOffset = (int)(bounds.y + walls.transform.parent.position.y);
         map = new bool[w, h];
-        createMap(tm);
+        createMap(walls);
 
         lck = new object();
         responseQueue = new List<RouteResponse>();
@@ -148,15 +149,15 @@ public class MapModule : MonoBehaviour
             Vector3 ret = new Vector3(0, 0, int.MaxValue);
             if (x > 0 && y > 0 && !map[x - 1, y - 1] && !nodes.Exists(t => t.x == x - 1 && t.y == y - 1)) ret = addToNodeList(ret, createNode(item, target, x - 1, y - 1));
             if (x > 0 && !map[x - 1, y] && !nodes.Exists(t => t.x == x - 1 && t.y == y)) ret = addToNodeList(ret, createNode(item, target, x - 1, y));
-            if (x > 0 && y < h && !map[x - 1, y + 1] && !nodes.Exists(t => t.x == x - 1 && t.y == y + 1)) ret = addToNodeList(ret, createNode(item, target, x - 1, y + 1));
+            if (x > 0 && y < h - 1 && !map[x - 1, y + 1] && !nodes.Exists(t => t.x == x - 1 && t.y == y + 1)) ret = addToNodeList(ret, createNode(item, target, x - 1, y + 1));
 
             if (y > 0 && !map[x, y - 1] && !nodes.Exists(t => t.x == x && t.y == y - 1)) ret = addToNodeList(ret, createNode(item, target, x, y - 1));
 
-            if (y < h && !map[x, y + 1] && !nodes.Exists(t => t.x == x && t.y == y + 1)) ret = addToNodeList(ret, createNode(item, target, x, y + 1));
+            if (y < h - 1 && !map[x, y + 1] && !nodes.Exists(t => t.x == x && t.y == y + 1)) ret = addToNodeList(ret, createNode(item, target, x, y + 1));
 
-            if (x < w && y > 0 && !map[x + 1, y - 1] && !nodes.Exists(t => t.x == x + 1 && t.y == y - 1)) ret = addToNodeList(ret, createNode(item, target, x + 1, y - 1));
-            if (x < w && !map[x + 1, y] && !nodes.Exists(t => t.x == x + 1 && t.y == y)) ret = addToNodeList(ret, createNode(item, target, x + 1, y));
-            if (x < w && y < h && !map[x + 1, y + 1] && !nodes.Exists(t => t.x == x + 1 && t.y == y + 1)) ret = addToNodeList(ret, createNode(item, target, x + 1, y + 1));
+            if (x < w - 1 && y > 0 && !map[x + 1, y - 1] && !nodes.Exists(t => t.x == x + 1 && t.y == y - 1)) ret = addToNodeList(ret, createNode(item, target, x + 1, y - 1));
+            if (x < w - 1 && !map[x + 1, y] && !nodes.Exists(t => t.x == x + 1 && t.y == y)) ret = addToNodeList(ret, createNode(item, target, x + 1, y));
+            if (x < w - 1 && y < h - 1 && !map[x + 1, y + 1] && !nodes.Exists(t => t.x == x + 1 && t.y == y + 1)) ret = addToNodeList(ret, createNode(item, target, x + 1, y + 1));
             if (ret.z < r.Item1.z) r = new Tuple<Vector3, Vector3>(ret, item);
         }
         return r;

@@ -33,21 +33,35 @@ public class SuitController : MonoBehaviour
     public float afterShootCooldown;
     float cd;
 
+    public bool changePosIfOutOfSight;
+    public float oosCooldown;
+    float oosCD;
+    public float maxDistanceFromPlayerToStartShooting;
+    public float minDistanceToOOS;
+
+    bool inSight(bool toAcquire)
+    {
+        return Physics2D.Linecast(transform.position, player.transform.position, layerMask).collider == null && (transform.position - player.transform.position).magnitude <= (toAcquire ? maxDistanceFromPlayerToStartShooting : minDistanceToOOS);
+    }
+
     private void FixedUpdate()
     {
         cd--;
+        oosCD--;
         if (isShooting && cd <= 0)
         {
+            bool ins = inSight(false);
+            if (ins) oosCD = oosCooldown;
             movement.stop();
             weaponController.fire();
-            if (weaponController.needsReload())
+            if (weaponController.needsReload() || (oosCD<=0 && !ins && changePosIfOutOfSight))
             {
                 weaponController.reload();
                 isShooting = false;
                 reloading = true;
                 moving = true;
 
-                setMovementTarget(5, 1000, 10000000);
+                setMovementTarget((oosCD <= 0 && !ins && changePosIfOutOfSight) ? 2 : 5, 1000, 10000000, maxDistanceFromPlayerToStartShooting);
                 movement.targetPos = movementTarget;
             }
         }
@@ -67,9 +81,9 @@ public class SuitController : MonoBehaviour
                     moving = false;
                     cd = afterStoppedCooldown;
                 }
-                else if (!reaction && cd <= 0 && Physics2D.Linecast(transform.position, player.transform.position, layerMask).collider == null)
+                else if (!reaction && cd <= 0 && inSight(true))
                 {
-                    setMovementTarget(1, 5, 1000);
+                    setMovementTarget(1, 5, 1000, maxDistanceFromPlayerToStartShooting);
                     movement.targetPos = movementTarget;
                     reaction = true;
                 }
@@ -84,7 +98,7 @@ public class SuitController : MonoBehaviour
 
     List<RaycastHit2D> rch2d = new List<RaycastHit2D>();
 
-    void setMovementTarget(int minRadius, int maxRadius, int maxRuns)
+    void setMovementTarget(int minRadius, int maxRadius, int maxRuns, float maxDistance)
     {
         int r = minRadius;
         int runs = 0;
@@ -94,9 +108,9 @@ public class SuitController : MonoBehaviour
             {
                 runs++;
                 if (runs > maxRuns) break;
-                if (r < maxRadius) r += 2;
+                if (r < maxRadius) r += 1;
                 movementTarget = new Vector3(Random.Range(-r, r), Random.Range(-r, r), 0) + transform.position;
-            } while (!movement.isPointOk(movementTarget));
+            } while (!movement.isPointOk(movementTarget) || (movementTarget - player.transform.position).magnitude > maxDistance);
             if (runs > maxRuns) break;
         } while (Physics2D.Linecast(movementTarget, player.transform.position, layerMask).collider != null);
         if (runs > maxRuns) movementTarget = transform.position;

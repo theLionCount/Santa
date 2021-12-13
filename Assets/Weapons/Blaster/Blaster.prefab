@@ -183,6 +183,9 @@ MonoBehaviour:
   spreadAngle: 7
   playerWeapon: 1
   screenShakeMagnitude: 0.08
+  pop: 0
+  dmg: 10
+  secondaryTarget: 0
   magSize: 30
   bulletsInMag: 0
 --- !u!95 &1443262762785793398
