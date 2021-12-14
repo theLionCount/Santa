@@ -21,6 +21,6 @@ On impact, the bullets scatters into multiple projectiles";
 
     public override string getDoorPrompt()
     {
-        return "Weapon part";
+        return "Ammo mod";
     }
 }

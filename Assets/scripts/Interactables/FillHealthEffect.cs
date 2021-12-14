@@ -9,8 +9,8 @@ public class FillHealthEffect : InteractEffect
     public override void doEffect()
     {
         //base.doEffect();
-        playerChar.health += playerChar.maxHealth * healthPercentage;
-        if (playerChar.health > playerChar.maxHealth) playerChar.health = playerChar.maxHealth;
+        health.health += health.maxHealth * healthPercentage;
+        if (health.health > health.maxHealth) health.health = health.maxHealth;
         //playerWeapon.magSize *= 2;
         //playerWeapon.coolDown *= 0.75f;
     }

@@ -9,13 +9,18 @@ public class InteractEffect : MonoBehaviour
     protected MagazinedWeapon playerWeapon;
     protected CharacterWeaponController weaponController;
     protected VisualReload reload;
+    protected HealthTracker health;
 
-    ProgressTracker progress;
+
+    protected ProgressTracker progress;
+
 
     public string shortName;
+    public string doorPrompt;
+    public string promtp;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         progress = GameObject.Find("Progress").GetComponent<ProgressTracker>();
         playerObject = GameObject.Find("Player");
@@ -23,6 +28,7 @@ public class InteractEffect : MonoBehaviour
         playerWeapon = playerObject.GetComponentInChildren<MagazinedWeapon>();
         weaponController = playerObject.GetComponentInChildren<CharacterWeaponController>();
         reload = playerWeapon.GetComponent<VisualReload>();
+        health = playerChar.GetComponent<HealthTracker>();
     }
 
     // Update is called once per frame
@@ -39,11 +45,11 @@ public class InteractEffect : MonoBehaviour
 
     public virtual string getPrompt()
     {
-        return "press F";
+        return "Press F to pick up!\r\n" + promtp; ;
     }
 
     public virtual string getDoorPrompt()
     {
-        return "some goodie";
+        return doorPrompt;
     }
 }

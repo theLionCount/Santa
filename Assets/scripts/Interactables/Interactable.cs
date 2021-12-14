@@ -9,9 +9,9 @@ public class Interactable : MonoBehaviour
 
     GameObject player;
 
-    InteractEffect effect;
+    protected InteractEffect effect;
 
-    Room room;
+    protected Room room;
 
     public Text prompt;
 
@@ -32,7 +32,7 @@ public class Interactable : MonoBehaviour
         if (pickable && Input.GetKeyDown(KeyCode.F)) pickUp();
     }
 
-    void pickUp()
+    public virtual void pickUp()
     {
         effect.doEffect();
         room.rewardTaken();

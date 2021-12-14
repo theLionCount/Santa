@@ -22,6 +22,6 @@ Greatly increases mag size";
 
     public override string getDoorPrompt()
     {
-        return "Weapon part";
+        return "Magazine mod";
     }
 }

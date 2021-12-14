@@ -30,6 +30,12 @@ public class BaseWeapon : MonoBehaviour
 
     public float bulletSizeMod = 1f;
 
+    public float critChance;
+
+    public float bleedChance;
+
+    public float healthyDmgModifier = 1;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -62,11 +68,14 @@ public class BaseWeapon : MonoBehaviour
 
         var blt = Instantiate(bullet, barrel.transform.position, Quaternion.Euler(0, 0, aim.angle + spread)).GetComponent<Bullet>();
         blt.dir = Quaternion.Euler(0, 0, spread) * aim.dir.normalized;
-        blt.dmg = dmg;
+        bool crit = Random.Range(0f, 1f) < critChance;
+        blt.dmg = dmg * (crit ? 2.4f : 1);
+        blt.crit = crit;
         blt.pop = pop;
         blt.secondaryTarget = secondaryTarget;
         blt.transform.localScale = blt.transform.localScale * bulletSizeMod;
-     
+        blt.bleedChance = bleedChance;
+        blt.healthyDmgModifier = healthyDmgModifier;
 
         if (playerWeapon) screenShake.shake(screenShakeMagnitude);
 
@@ -79,7 +88,7 @@ public class BaseWeapon : MonoBehaviour
         flash.transform.parent = barrel.transform;
     }
 
-    public virtual void reload()
+    public virtual void reload(bool fast = false)
     { 
     }
 

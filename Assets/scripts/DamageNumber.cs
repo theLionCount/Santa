@@ -20,7 +20,23 @@ public class DamageNumber : MonoBehaviour
     float pulseSize;
     float normalSize;
 
-    public void setDamage(float dmg)
+    bool message;
+
+    public void setMessage(string message)
+    {
+        if (text == null)
+        {
+            text = GetComponent<Text>();
+            textBaseSize = text.transform.localScale.x;
+        }
+        text.text = message;
+        normalSize = 1;
+        text.transform.localScale = new Vector3(textBaseSize, textBaseSize, 1);
+        text.color = new Color(1, 1, 0);
+        pulseSize = 1.1f;
+    }
+
+    public void setDamage(float dmg, bool crit)
     {
         if (text == null)
         {
@@ -28,6 +44,7 @@ public class DamageNumber : MonoBehaviour
             textBaseSize = text.transform.localScale.x;
         }
         text.text = ((int)dmg).ToString();
+        if (crit) text.text += " CRIT";
         var range = (dmgAtMaxSize - dmgAtMinSize);
         var x = (dmg > dmgAtMinSize ? dmg : dmgAtMinSize) - dmgAtMinSize;
         var point = x / range;

@@ -31,17 +31,42 @@ public class Room : MonoBehaviour
     int distance;
     string cRevID;
 
+    RoomSelector rs;
+
+    Arrow arrow;
+
+    public float showArrowCD;
+
     public static List<string> possibleRewards = new List<string>()
     {
         "Health",
         "MaxHealth",
-        "MaxHealth",
-        "BlasterTriggerMod",
-        "BlasterAmmo",
-        "BlasterMag",
         "RollNum",
-        "RollDmgReduction",
+    };
+
+    public static List<string> possibleCommonRewards = new List<string>()
+    {
+        "Dmg",
+        "Armour",
+        "BleedChance",
+        "DamageToHealthy",
+        "DodgeChance",
+        "MaxHealthSmall",
         "RollDistance",
+        "SmallHealth",
+        "Speed",
+        "Coins",
+        "RollDmgReduction",
+        "Speed",
+    };
+
+
+
+    public static List<string> notinFirstRoom = new List<string>()
+    {
+        "Health",
+        "MaxHealth",
+        "RollDmgReduction",
         "Dmg",
         "Armour",
     };
@@ -53,20 +78,38 @@ public class Room : MonoBehaviour
         if (distance == 0)
         {
             selectedReward = transform.Find("Rewards").Find(reward).gameObject;
-            if (reward.StartsWith("Blaster")) possibleRewards.Remove(reward);
+            if (reward.StartsWith("Blaster") || reward.StartsWith("Pistol")) possibleRewards.Remove(reward);
         }
         else selectedReward = transform.Find("Rewards").Find(Random.Range(0,3) == 0 ? "SmallHealth" : "Coins").gameObject;
     }
-    public void setDoors()
+
+    public static int commonStreak = 0;
+
+    public void setDoors(bool first = false)
     {
+        var common = Random.Range(0, 3) < 2;
+        if (first) common = false;
+        if (common) commonStreak += 1;
+        else commonStreak = 0;
+        if (commonStreak >= 5)
+        {
+            common = false;
+            commonStreak = 0;
+        }
         doors = GetComponentsInChildren<Door>();
+        List<string> chosen = new List<string>();
         foreach (var item in doors)
         {
-
-            var rID = possibleRewards[Random.Range(0, possibleRewards.Count)];
+            string rID;
+            do
+            {
+                rID = common ? possibleCommonRewards[Random.Range(0, possibleCommonRewards.Count)] : possibleRewards[Random.Range(0, possibleRewards.Count)];
+            } while ((first && notinFirstRoom.Contains(rID)) || chosen.Contains(rID));
+            chosen.Add(rID);
             item.reward = rID;
             item.rewardPrompt = transform.Find("Rewards").Find(rID).gameObject.GetComponent<InteractEffect>().getDoorPrompt();
-            item.distance = Random.Range(2, 5);
+            item.distance = first ? 1 : 1; // Random.Range(2, 5);
+            item.prompt.color = common ? Color.yellow : new Color(1f, 0.6f, 0);
         }
         if (distance > 0)
         {
@@ -97,7 +140,10 @@ public class Room : MonoBehaviour
         minThreat = selectedEnemies.Min(t => t.threatLevel);
         playerStartPos = transform.Find("PlayerStartPos").transform.position;
         GameObject.Find("Player").transform.position = playerStartPos;
+        GameObject.Find("Player").GetComponent<ActiveAbilities>().resetCharges();
+        rs = GameObject.Find("GamePlay").GetComponent<RoomSelector>();
         startCD = 50;
+        arrow = GameObject.Find("Player").GetComponentInChildren<Arrow>(true);
     }
 
     private void FixedUpdate()
@@ -115,9 +161,29 @@ public class Room : MonoBehaviour
                 cd = waveCooldown;
                 if (currentWave < waves.Count) startNextWave();
                 else if (!doorsOpen) createReward();
+                arrow.gameObject.SetActive(false);
             }
         }
         else startCD--;
+
+        if (livingEnemies.Count > 0)
+        {
+            showArrowCD++;
+            foreach (var item in livingEnemies)
+            {
+                var screenPos = Camera.main.WorldToScreenPoint(item.transform.position);
+                if (screenPos.x > 0f && screenPos.x < Screen.width && screenPos.y > 0f && screenPos.y < Screen.height) showArrowCD = 0;
+            }
+            if (showArrowCD > 120)
+            {
+                arrow.gameObject.SetActive(true);
+                arrow.setEnemy(livingEnemies.OrderBy(t => (t.transform.position - arrow.transform.position).magnitude).FirstOrDefault());
+            }
+            else
+            {
+                arrow.gameObject.SetActive(false);
+            }
+        }
     }
 
     void startNextWave()

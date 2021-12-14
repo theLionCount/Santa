@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class MaxHealthEffect : InteractEffect
 {
+
+    public float plusHealth;
     public override void doEffect()
     {
         base.doEffect();
-        playerChar.maxHealth += 25;
-        playerChar.health += 25;
+        health.maxHealth += plusHealth;
+        health.health += plusHealth;
         //playerWeapon.magSize *= 2;
         //playerWeapon.coolDown *= 0.75f;
     }

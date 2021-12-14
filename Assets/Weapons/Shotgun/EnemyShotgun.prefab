@@ -176,6 +176,9 @@ MonoBehaviour:
   dmg: 5
   secondaryTarget: 0
   bulletSizeMod: 1
+  critChance: 0
+  bleedChance: 0
+  healthyDmgModifier: 1
   magSize: 5
   bulletsInMag: 5
   bullets: 2

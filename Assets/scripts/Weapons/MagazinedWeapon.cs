@@ -9,11 +9,13 @@ public class MagazinedWeapon : BaseWeapon
     public int bulletsInMag;
 
     Reloader reloader;
+    Reloader fastReloader;
 
     public override void Start()
     {
         base.Start();
-        reloader = GetComponent<Reloader>();
+        reloader = GetComponents<Reloader>()[0];
+        if (GetComponents<Reloader>().Length>1) fastReloader = GetComponents<Reloader>()[1];
         bulletsInMag = magSize;
     }
 
@@ -32,9 +34,13 @@ public class MagazinedWeapon : BaseWeapon
         }
     }
 
-    public override void reload()
+    public override void reload(bool fast = false)
     {
-        if (magSize>bulletsInMag) reloader.startReload();
+        if (magSize > bulletsInMag)
+        {
+            if (!fast) reloader.startReload();
+            else fastReloader.startReload();
+        }
     }
 
     public void finishReload()

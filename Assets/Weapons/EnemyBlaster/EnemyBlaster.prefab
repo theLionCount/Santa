@@ -156,6 +156,10 @@ MonoBehaviour:
   pop: 0
   dmg: 10
   secondaryTarget: 0
+  bulletSizeMod: 1
+  critChance: 0
+  bleedChance: 0
+  healthyDmgModifier: 1
   magSize: 6
   bulletsInMag: 0
 --- !u!114 &975544745

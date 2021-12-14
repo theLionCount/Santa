@@ -25,6 +25,6 @@ Changes the fire mode to accurate, high damage 5 bullet burst";
 
     public override string getDoorPrompt()
     {
-        return "Weapon part";
+        return "Trigger mod";
     }
 }

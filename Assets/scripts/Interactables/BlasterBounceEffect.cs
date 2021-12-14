@@ -23,6 +23,6 @@ On hit, the bullet ricochets to a nerby enemy";
 
     public override string getDoorPrompt()
     {
-        return "Weapon part";
+        return "Ammo mod";
     }
 }

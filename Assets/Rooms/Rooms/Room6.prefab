@@ -22258,8 +22258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - 100
-  - 130
+  - 70
+  - 120
   waveCooldown: 100
   partialWaveCooldown: 120
 --- !u!114 &4456347585823424821

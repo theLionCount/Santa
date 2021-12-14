@@ -7,7 +7,7 @@ public class RollDmgReductionEffect : InteractEffect
     public override void doEffect()
     {
         base.doEffect();
-        playerChar.rollDamageReduction *= 0.7f;
+        health.rollDamageReduction *= 0.6f;
         //playerWeapon.magSize *= 2;
         //playerWeapon.coolDown *= 0.75f;
     }
@@ -15,12 +15,12 @@ public class RollDmgReductionEffect : InteractEffect
     public override string getPrompt()
     {
         return @"Press F to pick up!
-+30% armour while rolling";
++60% armour while rolling";
 
     }
 
     public override string getDoorPrompt()
     {
-        return "Roll buff";
+        return "Roll damage reduction";
     }
 }

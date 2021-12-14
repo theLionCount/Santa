@@ -9,7 +9,7 @@ public class BlasterSMGEffect : InteractEffect
         base.doEffect();
         // playerChar.health = playerChar.maxHealth;
         //playerWeapon.magSize *= 2;
-        playerWeapon.coolDown = 0.3f;
+        playerWeapon.coolDown = 1.35f;
         playerWeapon.spreadAngle = 11;
     }
 
@@ -23,6 +23,6 @@ Greatly increases fire rate and mag size at the cost of accuracy";
 
     public override string getDoorPrompt()
     {
-        return "Weapon part";
+        return "Trigger mod";
     }
 }

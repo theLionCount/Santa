@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankBase : MonoBehaviour, IMovable, IDmgTarget
+public class TankBase : MonoBehaviour, IMovable
 {
     public float speed;
 
@@ -12,13 +12,10 @@ public class TankBase : MonoBehaviour, IMovable, IDmgTarget
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     Aiming gunAim;
 
-    public float health;
-
     public WeaponController weaponController;
 
     public GameObject explosion;
-
-    DamageNumberCreator damageNumbers;
+    public HealthTracker health;
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +23,12 @@ public class TankBase : MonoBehaviour, IMovable, IDmgTarget
 
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
-        damageNumbers = GetComponentInChildren<DamageNumberCreator>();
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(LayerMask.GetMask("Walls"));
         contactFilter.useLayerMask = true;
         gunAim = gameObject.GetComponentInChildren<Aiming>();
         weaponController = gameObject.GetComponentInChildren<WeaponController>();
+        health = GetComponent<HealthTracker>();
     }
 
     public void move(Vector2 dir)
@@ -41,10 +38,12 @@ public class TankBase : MonoBehaviour, IMovable, IDmgTarget
 
     Vector2 movementDir;
 
+    bool died;
+
     public virtual void FixedUpdate()
     {
 
-        if (health <= 0)
+        if (health.health <= 0)
         {
             Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
             Destroy(gameObject);
@@ -64,19 +63,5 @@ public class TankBase : MonoBehaviour, IMovable, IDmgTarget
 
         if (rb2d.Cast(horizontal, contactFilter, hitBuffer, horizontal.magnitude * magnitudeAdjustment) <= 0) rb2d.position += horizontal;
         if (rb2d.Cast(vertical, contactFilter, hitBuffer, vertical.magnitude * magnitudeAdjustment) <= 0) rb2d.position += vertical;
-    }
-
-    public void damageHit(IDmgSource source)
-    {
-        var dmg = source.hitTarget(this);
-      
-        health -= dmg;
-        if (health + dmg>0) damageNumbers.damage(dmg);
-        health -= source.hitTarget(this);
-        anim.SetTrigger("Hit");
-        if (weaponController != null)
-        {
-            weaponController.blaster.onHit();
-        }
     }
 }

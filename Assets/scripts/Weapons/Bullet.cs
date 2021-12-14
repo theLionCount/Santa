@@ -22,6 +22,12 @@ public class Bullet : MonoBehaviour, IDmgSource
     public bool secondaryTarget;
     int layerMask;
 
+    public bool crit;
+
+    public float bleedChance;
+
+    public float healthyDmgModifier = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,5 +100,20 @@ public class Bullet : MonoBehaviour, IDmgSource
     public float getDamage()
     {
         return dmg;
+    }
+
+    bool IDmgSource.crit()
+    {
+        return crit;
+    }
+
+    float IDmgSource.bleedChance()
+    {
+        return bleedChance;
+    }
+
+    public float healthyDmg()
+    {
+        return healthyDmgModifier;
     }
 }

@@ -4913,6 +4913,7 @@ GameObject:
   - component: {fileID: 6087195218608173702}
   - component: {fileID: 6087195218608173700}
   - component: {fileID: 5744468390221812047}
+  - component: {fileID: -6838788019938986374}
   m_Layer: 0
   m_Name: tank
   m_TagString: Enemy
@@ -5055,9 +5056,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.16
-  health: 200
   weaponController: {fileID: 0}
   explosion: {fileID: 9028681399628925405, guid: 1dc4131e52bce4446a1749c1f9ceb5b9, type: 3}
+  health: {fileID: 0}
 --- !u!114 &6087195218608173702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5102,6 +5103,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threatLevel: 70
+--- !u!114 &-6838788019938986374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6087195218608173822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ccc98a893507946893064ce846524a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 150
+  maxHealth: 150
+  dmgRed: 1
+  rollDamageReduction: 1
+  player: 0
+  bleedDmg: 4
+  bleedDuration: 120
+  bleedTickIntervall: 20
 --- !u!1001 &6222602931478903616
 PrefabInstance:
   m_ObjectHideFlags: 0

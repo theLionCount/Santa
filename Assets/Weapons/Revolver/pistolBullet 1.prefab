@@ -102,6 +102,17 @@ MonoBehaviour:
   v: 0.9
   onHit: {fileID: 5206270012160372673, guid: f5ff093dd9cb2c54c95006fc28efb45d, type: 3}
   dmg: 60
+  popDmg: 0
+  cantHit: {fileID: 0}
+  pop: 0
+  secondaryDmg: 40
+  secondaryBullet: {fileID: 4495059461021274149}
+  range: 44
+  secondaryRangeinTiles: 17
+  secondaryTarget: 0
+  crit: 0
+  bleedChance: 0
+  healthyDmgModifier: 1
 --- !u!58 &9145293872817683479
 CircleCollider2D:
   m_ObjectHideFlags: 0

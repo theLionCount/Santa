@@ -7,7 +7,7 @@ public class ArmourEffect : InteractEffect
     public override void doEffect()
     {
         base.doEffect();
-        playerChar.dmgRed *= 0.9f;
+        health.dmgRed *= 0.9f;
         //playerWeapon.magSize *= 2;
         //playerWeapon.coolDown *= 0.75f;
     }
@@ -21,6 +21,6 @@ public class ArmourEffect : InteractEffect
 
     public override string getDoorPrompt()
     {
-        return "Character buff";
+        return "Armour";
     }
 }

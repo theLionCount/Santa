@@ -7,7 +7,7 @@ public class RollDistanceEffect : InteractEffect
     public override void doEffect()
     {
         base.doEffect();
-        playerChar.rollSpeedModifier *= 1.3f;
+        playerChar.rollSpeedModifier *= 1.13f;
         //playerWeapon.magSize *= 2;
         //playerWeapon.coolDown *= 0.75f;
     }
@@ -15,12 +15,12 @@ public class RollDistanceEffect : InteractEffect
     public override string getPrompt()
     {
         return @"Press F to pick up!
-+30 roll distance";
+Roll farther";
 
     }
 
     public override string getDoorPrompt()
     {
-        return "Roll buff";
+        return "Roll distance";
     }
 }

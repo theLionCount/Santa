@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1088017944654252637}
   m_Layer: 12
   m_Name: enemyBlasterBullet
-  m_TagString: Untagged
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,6 +110,9 @@ MonoBehaviour:
   range: 50
   secondaryRangeinTiles: 0
   secondaryTarget: 0
+  crit: 0
+  bleedChance: 0
+  healthyDmgModifier: 1
 --- !u!58 &9145293872817683479
 CircleCollider2D:
   m_ObjectHideFlags: 0

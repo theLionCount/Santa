@@ -22,6 +22,6 @@ Greatly reduces time to reload";
 
     public override string getDoorPrompt()
     {
-        return "Weapon part";
+        return "Magazine mod";
     }
 }

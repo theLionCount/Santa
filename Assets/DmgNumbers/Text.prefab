@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee270bb081157a4499110c1bbf77c78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeOutV: {x: -0.01, y: 0.01, z: 0}
+  fadeOutV: {x: -0.01, y: 0.1, z: 0}
   fadeoutTime: 30
   maxSize: 3
   dmgAtMaxSize: 200

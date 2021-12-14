@@ -6,20 +6,20 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     Image bar;
-    Character player;
+    HealthTracker health;
     public Text text;
 
     // Start is called before the first frame update
     void Start()
     {
         bar = GetComponent<Image>();
-        player = GameObject.Find("Player").GetComponent<Character>();
+        health = GameObject.Find("Player").GetComponent<HealthTracker>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        bar.fillAmount = player.health / player.maxHealth;
-        text.text = "HP: " + ((int)player.health).ToString() + "/" + ((int)player.maxHealth).ToString();
+        bar.fillAmount = health.health / health.maxHealth;
+        text.text = "HP: " + ((int)health.health).ToString() + "/" + ((int)health.maxHealth).ToString();
     }
 }

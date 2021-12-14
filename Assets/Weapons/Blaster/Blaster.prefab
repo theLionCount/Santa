@@ -178,14 +178,18 @@ MonoBehaviour:
   bullet: {fileID: 4495059461021274149, guid: 418406a0d8456ec419e2fc58df15c9e3, type: 3}
   muzzleFlash: {fileID: 80538408460125870, guid: 16e723bb5676258488e67a8e07433720, type: 3}
   barrel: {fileID: 5163642129645079629}
-  coolDown: 5
+  coolDown: 6
   currntBustSize: 0
   spreadAngle: 7
   playerWeapon: 1
   screenShakeMagnitude: 0.08
   pop: 0
-  dmg: 10
+  dmg: 11
   secondaryTarget: 0
+  bulletSizeMod: 1
+  critChance: 0
+  bleedChance: 0
+  healthyDmgModifier: 1
   magSize: 30
   bulletsInMag: 0
 --- !u!95 &1443262762785793398

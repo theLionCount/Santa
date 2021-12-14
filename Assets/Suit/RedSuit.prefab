@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 962069543}
   - component: {fileID: 1551094469}
   - component: {fileID: 3075615561018534443}
+  - component: {fileID: 5617362091067287386}
   m_Layer: 0
   m_Name: RedSuit
   m_TagString: Enemy
@@ -225,14 +226,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.092
-  health: 100
-  maxHealth: 0
   weaponController: {fileID: 0}
   rollSpeedModifier: 1.4
-  rollDamageReduction: 0
   rollNum: 1
   rollCDTime: 0
-  dmgRed: 1
+  reloadonRoll: 0
+  midRoll: 0
 --- !u!95 &8338396598574871016
 Animator:
   serializedVersion: 3
@@ -309,6 +308,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threatLevel: 25
+--- !u!114 &5617362091067287386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8338396598574870995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ccc98a893507946893064ce846524a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  dmgRed: 1
+  rollDamageReduction: 1
+  player: 0
+  bleedDmg: 4
+  bleedDuration: 120
+  bleedTickIntervall: 20
 --- !u!1 &8338396599899509374
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +485,8 @@ MonoBehaviour:
   dmg: 10
   secondaryTarget: 0
   bulletSizeMod: 1
+  critChance: 0
+  bleedChance: 0
   magSize: 10
   bulletsInMag: 0
 --- !u!114 &8338396600285973349

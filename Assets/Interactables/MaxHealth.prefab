@@ -350,3 +350,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shortName: Max health
+  doorPrompt: 
+  promtp: 
+  plusHealth: 50

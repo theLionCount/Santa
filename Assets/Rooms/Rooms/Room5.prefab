@@ -61478,7 +61478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - 170
+  - 180
   - 320
   waveCooldown: 100
   partialWaveCooldown: 120
