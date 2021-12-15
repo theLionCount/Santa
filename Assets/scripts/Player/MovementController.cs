@@ -7,12 +7,12 @@ public class MovementController : MonoBehaviour
 {
     bool w, a, s, d;
 
-    Character character;
+    RollMovementBAse character;
 
     // Start is called before the first frame update
     void Start()
     {
-        character = GetComponent<Character>();
+        character = GetComponent<RollMovementBAse>();
     }
 
     Vector2 getDir(Vector2 start)

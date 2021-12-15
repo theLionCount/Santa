@@ -7,7 +7,7 @@ public class RollDistanceEffect : InteractEffect
     public override void doEffect()
     {
         base.doEffect();
-        playerChar.rollSpeedModifier *= 1.13f;
+        playerRollMovement.rollSpeedModifier *= 1.13f;
         //playerWeapon.magSize *= 2;
         //playerWeapon.coolDown *= 0.75f;
     }

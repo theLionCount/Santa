@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KillCounter : MonoBehaviour
 {
-    Character player;
+    RollMovementBAse player;
     BaseWeapon weapon;
     public bool buff;
     public float buffDuration;
@@ -22,7 +22,7 @@ public class KillCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<Character>();
+        player = GetComponent<RollMovementBAse>();
         health = GetComponent<HealthTracker>();
         weapon = GetComponentInChildren<BaseWeapon>();
     }

@@ -7,6 +7,6 @@ public class PistolReloadOnRollEffect : InteractEffect
     public override void doEffect()
     {
         base.doEffect();
-        playerChar.reloadonRoll = true;
+        playerRollMovement.reloadonRoll = true;
     }
 }

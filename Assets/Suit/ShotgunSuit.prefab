@@ -101,6 +101,8 @@ GameObject:
   - component: {fileID: 1551094469}
   - component: {fileID: 3075615561018534443}
   - component: {fileID: 6205991033657024241}
+  - component: {fileID: 3063443933495237419}
+  - component: {fileID: 3052580926642073204}
   m_Layer: 0
   m_Name: ShotgunSuit
   m_TagString: Enemy
@@ -328,6 +330,32 @@ MonoBehaviour:
   bleedDmg: 4
   bleedDuration: 120
   bleedTickIntervall: 20
+  hitchance: 1
+--- !u!114 &3063443933495237419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8338396598574870995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d367327cdc2d648ba40d69ef856376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3052580926642073204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8338396598574870995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7e6fa341ecb9e4aac4e53423d8b645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.08
 --- !u!1001 &1777029922879984222
 PrefabInstance:
   m_ObjectHideFlags: 0

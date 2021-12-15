@@ -15,7 +15,7 @@ public class HealthTracker : MonoBehaviour, IDmgTarget
     Animator anim;
     WeaponController weaponController;
 
-    Character body;
+    RollMovementBAse body;
 
     public bool player;
 
@@ -35,7 +35,7 @@ public class HealthTracker : MonoBehaviour, IDmgTarget
         anim = GetComponent<Animator>();
         damageNumbers = GetComponentInChildren<DamageNumberCreator>();
         weaponController = gameObject.GetComponentInChildren<WeaponController>();
-        body = GetComponent<Character>();
+        body = GetComponent<RollMovementBAse>();
     }
 
     // Update is called once per frame

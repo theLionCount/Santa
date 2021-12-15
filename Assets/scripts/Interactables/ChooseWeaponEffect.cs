@@ -39,6 +39,7 @@ public class ChooseWeaponEffect : InteractEffect
         weaponObj.SetActive(true);
 
         playerChar.weaponController = weaponObj.GetComponent<WeaponController>();
+        playerRollMovement.weaponController = weaponObj.GetComponent<WeaponController>();
 
         foreach (var item in rewardNames.Where(t=>t.StartsWith(weaponName)))
         {

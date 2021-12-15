@@ -11,6 +11,8 @@ public class InteractEffect : MonoBehaviour
     protected VisualReload reload;
     protected HealthTracker health;
 
+    protected RollMovementBAse playerRollMovement;
+
 
     protected ProgressTracker progress;
 
@@ -29,6 +31,7 @@ public class InteractEffect : MonoBehaviour
         weaponController = playerObject.GetComponentInChildren<CharacterWeaponController>();
         reload = playerWeapon.GetComponent<VisualReload>();
         health = playerChar.GetComponent<HealthTracker>();
+        playerRollMovement = playerChar.GetComponent<RollMovementBAse>();
     }
 
     // Update is called once per frame
